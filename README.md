@@ -70,3 +70,9 @@ You must not modify `lines_to_svg.py`, except for the step B changes regarding c
 You may use the Python modules `Line_Point`, `copy`, `math`, `re` and `sys`.
 
 **You may not use any other Python modules.**
+
+**Usefull Links**
+
+http://code.activestate.com/recipes/578765-circle-inversion-fractals/
+https://lsandig.org/blog/2014/08/apollon-python/en/
+
