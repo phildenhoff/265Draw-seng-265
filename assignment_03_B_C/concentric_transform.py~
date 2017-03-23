@@ -8,7 +8,7 @@ import math
 import copy
 import Line_Point
 
-DEFCOLOUR = "BlueViolet"
+DEFCOLOUR = "AntiqueWhite"
 
 # Ask about coloured line transformations in Line_Point.py
 # As in, why are they not supported?

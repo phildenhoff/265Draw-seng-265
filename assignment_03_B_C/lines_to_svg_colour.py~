@@ -82,7 +82,7 @@ def parse_line(line):
 
 	# ***** parse x0 y0 x1 y1 colour
 	L = [ ]
-	x = re.compile('([+-]?\d+)(?: +|$)([A-Za-z]+\s*)?')
+	x = re.compile('([+-]?\d+)(?: +|$)([A-Za-z]+\b*)?')
 	while True:
 		# *** match
 		m = x.match(line, offset)

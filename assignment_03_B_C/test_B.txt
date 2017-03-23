@@ -33,4 +33,4 @@ Error in line 18:
                 ^
 Error in line 19:
    line 1 2 3 4 Red a
-                   ^
+                    ^

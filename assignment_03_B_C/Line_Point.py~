@@ -122,7 +122,7 @@ class Line:
 	Preconditions
 		None
 	'''
-	def __init__(self, point0, point1, colour="Black"):
+	def __init__(self, point0, point1, colour="Red"):
 		# avoid shallow copy: create new Point instances
 		self.point0 = Point(point0.x, point0.y)
 		self.point1 = Point(point1.x, point1.y)
