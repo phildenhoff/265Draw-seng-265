@@ -14,9 +14,6 @@ import Line_Point
 def drawConcentric(lines, angle, index):
     """Draw a shape based on its index and angle."""
     lines = copy.deepcopy(lines)
-    # print original shape
-    for line in lines:
-        print 'line', line
     # print newly rotated items
     for line in lines:
         line.scale(0.5)
@@ -56,6 +53,10 @@ if __name__ == '__main__':
 
     SHAPE = loadLineFile(sys.stdin)
     SHAPEOFFSET = generateOffset(NUMINNERSHAPES)
+
+    # print original shape
+    for originalLine in SHAPE:
+        print 'line', originalLine
 
     for i in range(NUMINNERSHAPES):
         drawConcentric(SHAPE, SHAPEOFFSET, i)
