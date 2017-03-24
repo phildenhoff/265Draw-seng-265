@@ -10,9 +10,6 @@ import Line_Point
 
 DEFCOLOUR = "BlueViolet"
 
-# Ask about coloured line transformations in Line_Point.py
-# As in, why are they not supported?
-
 def drawConcentric(lines, angle, index):
     """Draw a shape based on its index and angle."""
     lines = copy.deepcopy(lines)
@@ -62,8 +59,8 @@ if __name__ == '__main__':
 
     # print original shape
     
-#for originalLine in SHAPE:
- #       print 'line', originalLine
+    for originalLine in SHAPE:
+        print 'line', originalLine
 
     for i in range(NUMINNERSHAPES):
         drawConcentric(SHAPE, SHAPEOFFSET, i)
