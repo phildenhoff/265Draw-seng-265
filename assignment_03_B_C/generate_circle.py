@@ -1,14 +1,18 @@
 import sys
 import math
 import Line_Point
+# pylint: disable=all
 
 '''
 purpose
-	write to stdout a circle with radius n and radius scale factor f
+	write to stdout a circle with radius n, colours c, concentric layers l, and inner circles i
 preconditions
-	n is a positive integer
-	f is a floating point numbers
+	n is a positive integer and less than or equal to 250
+    l is a positive integer
+    i is a positive integer
+    c is a valid colour string from css_colour.txt
 '''
+
 
 def next_circle(root, f):
 	# copy circle
@@ -28,17 +32,17 @@ def next_circle(root, f):
 
 	return new_circle
 
-def recursive_draw(root,h, f):
+def recursive_draw(root,n,l,i):
 	# end recursion if base case reached
-	if (h == 0):
+	if (l == 0):
 		return
 
 	# print root
 	print 'line', root
 
 	# continue with recursion
-	recursive_draw( next_circle(root,f), h-1, a, f )
-	recursive_draw( next_circle(root, f), h-1, a, f )
+	recursive_draw( next_circle(root,f), n, l-1, i )
+	recursive_draw( next_circle(root,f), n, l-1, i )
 
 # ********** process the command line arguments
 
@@ -57,8 +61,14 @@ if height < 1 or branch_factor <= 0:
 	sys.exit(3)
 
 # root: height 100, at bottom of canvas
-point0 = Line_Point.Point(0.0,-250.0)
-point1 = Line_Point.Point(0.0,-150.0)
-root = Line_Point.Line(point0, point1)
+s = 765
+central_angle = 2 * math.pi / s
+p0 = Line_Point.Point(x0, y0)
+while s > 0:
+	p1 = Line_Point.Point(p0.x, p0.y)
+	p1.rotate(central_angle)
+	print 'line', Line_Point.Line(p0, p1)
+	p0 = p1
+	s = s - 1
 
 recursive_draw(root, height, branch_angle, branch_factor)

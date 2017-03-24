@@ -65,3 +65,10 @@ fi
 # generating images
 python generate_polygon.py 250 0 10000 > k1.txt
 python lines_to_svg_colour.py k1.txt > k1.svg
+# step through each iteration of levels
+COUNTER=0
+until [ $COUNTER -eq $levels ]; do
+  python concentric_transform.py k1.txt > k1.txt
+  echo item: $COUNTER
+  let COUNTER+=1
+done
