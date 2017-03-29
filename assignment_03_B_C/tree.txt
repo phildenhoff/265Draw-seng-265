@@ -1,0 +1,7 @@
+line 0 -250 0 -150 Black
+line 0 -150 -91 -192 Black
+line -91 -192 -15 -257 Black
+line -91 -192 -91 -92 Black
+line 0 -150 91 -192 Black
+line 91 -192 91 -92 Black
+line 91 -192 15 -257 Black

@@ -1,0 +1,7 @@
+line 0 0 0 20 Black
+line 0 20 -18 12 Black
+line -18 12 -3 -1 Black
+line -18 12 -18 32 Black
+line 0 20 18 12 Black
+line 18 12 18 32 Black
+line 18 12 3 -1 Black

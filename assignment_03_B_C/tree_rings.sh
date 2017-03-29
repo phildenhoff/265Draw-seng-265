@@ -17,4 +17,4 @@ python rotate_scale_translate.py -x 0 -y -25.0 tree1.txt > tree2.txt
 
 # replicate tree in rings
 python rings.py $number_of_rings < tree2.txt > tree_rings.txt
-python lines_to_svg.py tree_rings.txt > tree_rings.svg
+python lines_to_svg_colour.py tree_rings.txt > tree_rings.svg

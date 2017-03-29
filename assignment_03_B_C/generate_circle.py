@@ -33,10 +33,10 @@ def recursive_draw(circletop,n,l,s):
 	print 'line', circletop
 
 	# continue with recursion
-	recursive_draw( draw_circle(circletop,colour,s), l-1,s/2)
-	recursive_draw( draw_circle(circletop,colour,s), l-1,s/2)
-	recursive_draw( draw_circle(circletop,colour,s), l-1,s/2)
-	recursive_draw( draw_circle(circletop,colour,s), l-1,s/2)
+	recursive_draw( draw_circle(circletop,colour,s/2), l-1,s/2)
+	recursive_draw( draw_circle(circletop,colour,s/2), l-1,s/2)
+	recursive_draw( draw_circle(circletop,colour,s/2), l-1,s/2)
+	recursive_draw( draw_circle(circletop,colour,s/2), l-1,s/2)
 
 # ********** process the command line arguments
 
