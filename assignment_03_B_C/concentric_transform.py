@@ -22,6 +22,7 @@ def drawConcentric(lines, angle, index):
 
 def generateOffset(numInnerShapes):
     """Returns angle in radians between each shape."""
+    if (numInnerShapes == 0): return 0
     return float(2*math.pi / numInnerShapes)
 
 def loadLineFile(fileObject, colour=DEFCOLOUR):

@@ -60,12 +60,15 @@ s = 2000
 spacing = 248/layers
 circletop = Line_Point_colour.Point(x0, y0)
 colour_list=[]
-colour_list.append(colour)
 with open('css_colours.txt') as f:
 	 alist = f.read().splitlines()
 for count in range(colourRange-1):
 	r = random.randint(0,147)
 	colour_list.append(alist[r])
-
+if (colour in alist):
+	colour_list.append(colour)
+else:
+	print >> sys.stderr, "ERROR: Invalid CSS colour. Check spelling and capitilization against css_colours.txt."
+	sys.exit(4)
 
 recursive_draw(circletop, layers, spacing, s)
