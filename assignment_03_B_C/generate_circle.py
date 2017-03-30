@@ -18,7 +18,7 @@ def draw_circle(circletop, layer, spacing, cr, sides):
 	sides = sides*(1-layer*1/10)
 	central_angle = 2 * math.pi / sides
 	new_x0 = float(0)
-	new_y0 = float(248-spacing*layer)
+	new_y0 = float(248-spacing*(layer-1))
 	if new_y0 == 0:
 		new_y0 = float(248)
 	new_circle = Line_Point_colour.Point(new_x0, new_y0)
@@ -34,7 +34,7 @@ def recursive_draw(circletop, layer, spacing, sides):
 	# end recursion if base case reached
 	if layer == 0 or sides == 0:
 		return
-	colour = colour_list[layer%(colourRange-1)]
+	colour = colour_list[layer%(colourRange)]
 	# continue with recursion
 	recursive_draw(draw_circle(circletop, layer, spacing, colour, sides), layer-1, spacing, sides)
 # ********** process the command line arguments
@@ -63,9 +63,9 @@ colour_list=[]
 colour_list.append(colour)
 with open('css_colours.txt') as f:
 	 alist = f.read().splitlines()
-count = 1
 for count in range(colourRange-1):
 	r = random.randint(0,147)
 	colour_list.append(alist[r])
+
 
 recursive_draw(circletop, layers, spacing, s)
