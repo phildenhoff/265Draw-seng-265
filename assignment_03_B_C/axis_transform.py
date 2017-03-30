@@ -1,51 +1,59 @@
+"""Write to stdout a series of copies of the input shape along the x axis on both sides of the
+    original shape and scales the size by half everytime"""
 import sys
-import math
 import copy
 import Line_Point
 
-"""writes to stdout a series of copies of the input shape along the x axis on both sides of the original shape and scales the size by half everytime"""
+DEFCOLOUR = "BlueViolet"
 
-def draw(lines,delta_x, n):
-	"""draws copies of the shape along the x axis smaller everytime"""
-	lines = copy.deepcopy(lines)
+def draw(lines, delta_x):
+    """draws copies of the shape along the x axis smaller everytime"""
+    lines = copy.deepcopy(lines)
 
-	for line in lines:
-		line.scale(0.5)
-		line.translate(delta_x, 0.0)
-		line.translate(-delta_x, 0.0)
-		print 'line', line
+    for line in lines:
+        line.scale(0.5)
+        line.translate(delta_x, 0.0)
+        line.translate(-delta_x, 0.0)
+        print 'line', line
 
-	return
+    return
 
-def Offset(size):
-	return size + 125
+def offset(size_given):
+    """Return size of object plus constant 125."""
+    return size_given + 125
 
 def load_line_files(file_object):
-	line_object = [ ]
-	for line in file_object:
-		point0 = Line_Point.Point(float(line_object[1]),float(line_object[2]))
-		point1 = Line_Point.Point(float(line_object[3]),float(line_object[4]))
-		line_object = Line_Point.Point(point0, point1)
+    """Convert file_object to line_object."""
+    lines = []
+    for line in file_object:
+        lineObject = line.split()
+        point0 = Line_Point.Point(float(lineObject[1]), float(lineObject[2]))
+        point1 = Line_Point.Point(float(lineObject[3]), float(lineObject[4]))
+    try:
+        colour = lineObject[5]
+    except IndexError:
+        colour = DEFCOLOUR
+        lineObject = Line_Point.Line(point0, point1, colour)
 
-		line_object.append(line_object)
-
-	return line_object
+        lines.append(lineObject)
+    return lines
 
 if len(sys.argv) != 2:
-	print >> sys.stdrr, 'Syntax: ' + sys.argv[0] + 'size of shape'
-	sys.exit(1)
+    print >> sys.stderr, 'Syntax: ' + sys.argv[0] + ' size of shape'
+    sys.exit(1)
 
 try:
-	size = int(sys.argv[1])
+    size = int(sys.argv[1])
 except ValueError:
-	print >> sys.drr, 'Syntax: ' + sys.argv[0] + 'size of shape'
-	sys.exit(2)
+    print >> sys.stderr, 'Syntax: ' + sys.argv[0] + ' size of shape'
+    sys.exit(2)
 
-SHAPE = load_line_file(sys.stdin)
-size = Offset(size)
+SHAPE = load_line_files(sys.stdin)
+size = offset(size)
 
 for originalline in SHAPE:
-	print'line', originalline
+    print'line', originalline
 
-for i in range(n):
-	draw(SHAPE, size, i)
+#for i in range(n): # Is this supposed to be what the user picks?s
+for i in range(size):
+    draw(SHAPE, size)

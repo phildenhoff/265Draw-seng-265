@@ -3,7 +3,6 @@ Generate a shape (circle) with two of itself, half the radius, inside - touching
 radius of the outer circle and the center of the circle.
 """
 import sys
-import os # Not allowed to be included
 import math
 import copy
 import Line_Point
@@ -35,30 +34,30 @@ def loadLineFile(fileObject, colour=DEFCOLOUR):
         lineObject = line.split()
         point0 = Line_Point.Point(float(lineObject[1]), float(lineObject[2]))
         point1 = Line_Point.Point(float(lineObject[3]), float(lineObject[4]))
-	try:
-		colour = lineObject[5]
-	except IndexError:
-		colour = DEFCOLOUR
-        lineObject = Line_Point.Line(point0, point1, colour)
+        try:
+            colour = lineObject[5]
+        except IndexError:
+            colour = DEFCOLOUR
 
+        lineObject = Line_Point.Line(point0, point1, colour)
         lines.append(lineObject)
+
     return lines
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print >> sys.stderr, 'Syntax: %s [number of inner shapes]' %os.path.basename(__file__)
+        print >> sys.stderr, 'Syntax: %s [number of inner shapes]' %sys.argv[0]
         sys.exit(1)
     try:
         NUMINNERSHAPES = int(sys.argv[1])
     except ValueError:
-        print >> sys.stderr, 'Syntax: %s [number of inner shapes]' %os.path.basename(__file__)
+        print >> sys.stderr, 'Syntax: %s [number of inner shapes]' %sys.argv[0]
         sys.exit(1)
 
     SHAPE = loadLineFile(sys.stdin)
     SHAPEOFFSET = generateOffset(NUMINNERSHAPES)
-
     # print original shape
-    
+
     for originalLine in SHAPE:
         print 'line', originalLine
 
