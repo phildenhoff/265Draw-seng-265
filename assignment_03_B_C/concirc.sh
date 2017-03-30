@@ -1,21 +1,24 @@
 #/bin/bash
 # usage: concirc.sh
 #   options:
-#       [-l number of levels down]
-#       [ valid css colors (unlimited number)]
-#       [-n inner concentric circle number]
+#       [ -l number of levels down]
+#       [ -c valid css color]
+#       [ -n inner concentric circle number]
+#	[ -y number of inner shapes]
 
 verbose='false'
 levels='' # how many times to do the operations
 n='' # how many objects to put on each level
 cflag='' # whether colors have been listed
 color=''
+y='' # number of different colours to use
 
 usage() {
- >&2 echo -e "Usage: concirc.sh [ -l number of levels] [-n number of inner circles] [ -c valid css colors ]
+ >&2 echo -e "Usage: concirc.sh [ -l number of levels] [-n number of inner shapes] [-y number of colors to cycle through] [ -c valid css color ]
 Excluding any one argument will set it to the default:
 \tl = 3
 \tn = 3
+\ty = 2
 \tc = Black"
  echo -e "Using concirc.sh -h will bring up this manual." >&2
  exit 1
@@ -28,24 +31,27 @@ if [ $# -lt 1 ]; then
 fi
 
 # Handle given arguments
-while getopts 'hl:n:cv' flag; do
+while getopts 'hl:n:c:vy:' flag; do
     case ${flag} in
 	h) usage ;;
         l) levels="${OPTARG}" ;;
         n) n="${OPTARG}"  ;;
-        c) cflag='true' ;;
+        # c) cflag='true' ;; # multi colour support
+	c) color="${OPTARG}" ;;
         v) verbose='true' ;;
+	y) y="${OPTARG}" ;; 
 	*) usage ;;
     esac
 done
 shift $(( OPTIND - 1))
 
-# If cflag set, get colors from arguments
-if [ "$cflag" == 'true' ]; then
- for color in "$@"; do
-  colors+="$color "
- done
-fi
+# multi colour support
+## If cflag set, get colors from arguments
+#if [ "$cflag" == 'true' ]; then
+# for color in "$@"; do
+#  colors+="$color "
+# done
+#fi
 
 # Setting default values
 if [ "$levels" == '' ]; then
@@ -54,21 +60,29 @@ fi
 if [ "$n" == '' ]; then
   n=3
 fi
-if [ "$cflag" == '' ]; then
-  colors="Black"
+if [ "$color" = '' ]; then
+  color="Black"
+fi
+if [ "$y" == '' ]; then
+  y=2
 fi
 
 if [ "$verbose" == 'true' ]; then
- echo -e "Levels: $levels \nObjects per level: $n \nColors: $colors"
+ echo -e "Levels: $levels \nObjects per level: $n \nNumber of colors: $y \nColor: $color"
 fi
 
-# generating images
-python generate_polygon.py 175 175 2000 > k1.txt
-# step through each iteration of levels
-COUNTER=0
-until [ $COUNTER -eq $levels ]; do
-  python concentric_transform.py 5 k1.txt > k1.txt
-  echo item: $COUNTER
-  let COUNTER+=1
-done
-python lines_to_svg_colour.py k1.txt > k1.svg
+# generating circle
+if [ "$verbose" == 'true' ]; then
+  echo "Generating lines files"
+fi
+python generate_circle.py $levels $y $color > k1.txt
+python concentric_transform.py $y < k1.txt > k2.txt
+if [ "$verbose" == 'true' ]; then
+  echo "Generating SVG from text files"
+fi
+python lines_to_svg_colour.py k2.txt > concirc.svg
+if [ "$verbose" != 'true' ]; then
+  rm k1.txt k2.txt
+else
+  echo "Not removing text files due to verbose mode"
+fi
