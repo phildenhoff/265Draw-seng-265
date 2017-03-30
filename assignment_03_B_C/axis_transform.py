@@ -3,13 +3,13 @@ import math
 import copy
 import Line_Point
 
-"writes to stdout a series of copies of the input shape along the x axis on both sides of the original shape and scales the size by half everytime
+"""writes to stdout a series of copies of the input shape along the x axis on both sides of the original shape and scales the size by half everytime"""
 
 def draw(lines,delta_x, n)
 	"draws copies of the shape along the x axis smaller everytime"
 	lines = copy.deepcopy(lines)
 
-	for line in lines: 
+	for line in lines:
 		line.scale(0.5)
 		line.translate(delta_x, 0.0)
 		line.translate(-delta_x, 0.0)
@@ -28,7 +28,7 @@ def load_line_files(file_object)
 		line_object = Line_Point.Point(point0, point1)
 
 		line_object.append(line_object)
-	
+
 	return line_object
 
 if len(sys.argv) != 2:
