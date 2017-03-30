@@ -1,13 +1,13 @@
 import sys
 import math
 import Line_Point_colour
-# pylint: disable=W0312
+import random
 
 '''
 purpose
 	write to stdout a concentric circle with colour range cr, concentric layers l, and starting colour c
 preconditions
-    l is a positive integer
+    l is a positive integer < 10
     cr is a positive integer less than or equal to l
     c is a valid colour string from css_colour.txt
 '''
@@ -30,12 +30,13 @@ def draw_circle(circletop, layer, spacing, cr, sides):
 		sides = sides - 1
 	return new_circle
 
-def recursive_draw(circletop, layer, spacing, cr, sides):
+def recursive_draw(circletop, layer, spacing, sides):
 	# end recursion if base case reached
 	if layer == 0 or sides == 0:
 		return
+	colour = colour_list[layer%(colourRange-1)]
 	# continue with recursion
-	recursive_draw(draw_circle(circletop, layer, spacing, cr, sides), layer-1, spacing, cr, sides)
+	recursive_draw(draw_circle(circletop, layer, spacing, colour, sides), layer-1, spacing, sides)
 # ********** process the command line arguments
 
 if len(sys.argv) != 4:
@@ -58,4 +59,13 @@ y0 = float(248)
 s = 2000
 spacing = 248/layers
 circletop = Line_Point_colour.Point(x0, y0)
-recursive_draw(circletop, layers, spacing, colour, s)
+colour_list=[]
+colour_list.append(colour)
+with open('css_colours.txt') as f:
+	 alist = f.read().splitlines()
+count = 1
+for count in range(colourRange-1):
+	r = random.randint(0,147)
+	colour_list.append(alist[r])
+
+recursive_draw(circletop, layers, spacing, s)
