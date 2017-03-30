@@ -1998,6 +1998,9 @@ line 3 248 2 248 Black
 line 2 248 2 248 Black
 line 2 248 1 248 Black
 line 1 248 0 248 Black
+y 248.0
+y 248.0
+y 248.0
 line 0 248 -1 248 Black
 line -1 248 -2 248 Black
 line -2 248 -2 248 Black
@@ -3998,6 +4001,9 @@ line 3 248 2 248 Black
 line 2 248 2 248 Black
 line 2 248 1 248 Black
 line 1 248 0 248 Black
+y 248.0
+y 248.0
+y 248.0
 line 0 248 -1 248 Black
 line -1 248 -2 248 Black
 line -2 248 -2 248 Black
@@ -5998,6 +6004,9 @@ line 3 248 2 248 Black
 line 2 248 2 248 Black
 line 2 248 1 248 Black
 line 1 248 0 248 Black
+y 248.0
+y 248.0
+y 248.0
 line 0 248 -1 248 Black
 line -1 248 -2 248 Black
 line -2 248 -2 248 Black
