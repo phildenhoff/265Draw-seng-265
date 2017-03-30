@@ -1,0 +1,7 @@
+line 0 0 0 100 Black
+line 0 100 -91 58 Black
+line -91 58 -15 -7 Black
+line -91 58 -91 158 Black
+line 0 100 91 58 Black
+line 91 58 91 158 Black
+line 91 58 15 -7 Black
