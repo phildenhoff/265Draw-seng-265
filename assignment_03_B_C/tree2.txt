@@ -1,7 +1,0 @@
-line 0 -25 0 -5 Black
-line 0 -5 -18 -13 Black
-line -18 -13 -3 -26 Black
-line -18 -13 -18 7 Black
-line 0 -5 18 -13 Black
-line 18 -13 18 7 Black
-line 18 -13 3 -26 Black
